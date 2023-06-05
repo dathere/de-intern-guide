@@ -1,6 +1,8 @@
 # 🚀 Data Engineering Intern Onboarding Guide
 
-[![datHere-animated-logo-compressed](https://github.com/dathere/de-intern-guide/assets/30333942/1aa66e26-226f-41a8-88bc-059bd39f8f84)](https://dathere.com)
+[![datHere-animated-logo-compressed](https://github.com/dathere/de-intern-guide/assets/30333942/cc99ca3f-8fd5-4809-8005-ff03452afb39)](https://dathere.com)
+
+**[View the guide here!](https://dathere.github.io/de-intern-guide/)**
 
 ## 📖 About the Guide
 
