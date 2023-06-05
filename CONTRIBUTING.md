@@ -32,4 +32,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-The site is deployed through Vercel. Any changes pushed to the `main` branch will be automatically deployed to the live site. You may first want to test your changes on a branch before merging to `main`, both locally and by viewing the Vercel preview.
+The site is [deployed through GitHub Pages](https://docusaurus.io/docs/deployment#deploying-to-github-pages).
