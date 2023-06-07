@@ -64,6 +64,7 @@ const config = {
         logo: {
           alt: "datHere Logo",
           src: "img/datHere-logo.png",
+          srcDark: "img/datHere-logo-dark.png",
         },
         items: [
           {
