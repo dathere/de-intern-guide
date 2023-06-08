@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # 💻 Ubuntu VM Setup
 
-In this section we'll go over how to install [VirtualBox](https://www.virtualbox.org/) and run [Ubuntu](https://ubuntu.com/) 22.04.2 LTS on a virtual machine.
+In this section we cover how to install [VirtualBox](https://www.virtualbox.org/) on your operating system (OS) and run [Ubuntu](https://ubuntu.com/) 22.04.2 LTS on a virtual machine (VM).
 
 ## 📺 Video Tutorial
 
@@ -20,12 +20,125 @@ import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 ## 📝 Written Tutorial
 
-### 📥 Download VirtualBox
+You may find more comprehensive instructions and details on the [online user manual for VirtualBox 7.0](https://docs.oracle.com/en/virtualization/virtualbox/7.0/user/index.html).
 
-### 🛠 Install VirtualBox
+### 📥 Download VirtualBox & the Extension Pack
+
+1. Go to the [VirtualBox downloads page](https://www.virtualbox.org/wiki/Downloads).
+2. Download the **VirtualBox platform package** based on your computer's OS.
+
+For example, since I'm on a computer running Windows 10 as my OS, then I would choose "Windows hosts".
+
+3. Download the **VirtualBox Oracle VM VirtualBox Extension Pack**.
+
+![VirtualBox download page](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-download-page.png)
+
+### 🛠 Install VirtualBox & the Extension Pack
+
+1. Run the VirtualBox installer. Select **Yes** if prompted to allow VirtualBox Installer to make changes to your device.
+
+![VirtualBox Installer Yes](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-installer-yes.png)
+
+<details><summary>
+
+Click here if you get an error that says:
+
+> Oracle VM VirtualBox needs the Microsoft Visual C++ 2019 Redistributable Package being installed first. Please install and restart the installation of Oracle VM Virtualbox.
+
+</summary>
+
+![VirtualBox Installer Error](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-installer-error.png)
+
+To fix this issue, install the appropriate package for your system from [this website](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022).
+
+Choose the correct download link for your system. On Windows 10 you can find your system type by opening the **System Information** app and reading the **System Type** value.
+
+![System Information](/img/docs/onboarding/ubuntu-vm-setup/system-information.png)
+
+![System Type](/img/docs/onboarding/ubuntu-vm-setup/system-type.png)
+
+![Visual Package Download Page](/img/docs/onboarding/ubuntu-vm-setup/visual-package-download-page.png)
+
+Agree to the license terms and conditions, press **Install**, press **Yes** if prompted to allow the program to make changes to your device, and the setup should successfully complete and you can click **Close**.
+
+</details>
+
+2. On the installation wizard popup, click "Next".
+
+![VirtualBox Wizard](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-wizard.png)
+
+3. You may change the location for installing VirtualBox by clicking the **Browse** button. Then click **Next**.
+
+4. Click **Yes** for the **Warning: Network Interfaces** and **Missing Dependencies Python Core / win32api** sections.
+
+5. Click **Install** and wait for the installation to complete. Then click **Finish**.
+
+You have now successfully installed VirtualBox.
+
+6. Run the VirtualBox Extension Pack that you downloaded before. Select **Yes** if prompted to allow VirtualBox Installer to make changes to your device.
+
+![VirtualBox Extension Pack Install](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-extension-pack-install.png)
+
+You have now successfully installed the VirtualBox Extension Pack.
 
 ### 📥 Download Ubuntu 22.04.2 LTS
 
+:::caution
+
+Make sure your computer fulfills recommended system requirements for Ubuntu 22.04.2 LTS:
+
+- 2 GHz dual-core processor or better
+- 4 GB system memory
+- 25 GB of free hard drive space
+
+You'll also need ~5 GB of space for the downloaded `.iso` file, though you can delete the file once you've fully setup the VM.
+
+:::
+
+1. Go to the [Ubuntu Desktop downloads page](https://ubuntu.com/download/desktop).
+2. Download Ubuntu 22.04.2 LTS by clicking the green **Download 22.04.2** button.
+
+![Ubuntu download page](/img/docs/onboarding/ubuntu-vm-setup/ubuntu-download-page.png)
+
 ### 🖥 Setup a Virtual Machine (VM)
 
-### ✨ Bonus Tips
+1. Open up VirtualBox and click the **New** button (you can also click on the `Machine` menu then press `New`).
+
+![VirtualBox New Button](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-new-button.png)
+
+2. On the new popup, provide a name that you'd like to identify your VM, the folder in which you'd like to install your VM, and the Ubuntu `.iso` file that you've downloaded. Then click **Next**.
+
+![VirtualBox Name & OS](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-name-and-os.png)
+
+3. Enter a valid username, password, hostname (this is what Ubuntu considers its name as), and enable Guest Additions along with pointing to its `.iso` file. Then click **Next**.
+
+![VirtualBox Guest OS Setup](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-guest-os-setup.png)
+
+4. Set the Base Memory and Processors to the appropriate settings. You may have different values but a general guideline is to stay anywhere within the green section up until the border with the orange section. Generally the more you allocate, the faster the VM. Then click **Next**.
+
+![VirtualBox Hardware](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-hardware.png)
+
+5. Select **Create a Virtual Hard Disk Now** and set a Disk Size of at least 25 GB. Then click **Next**.
+
+![VirtualBox Hard Disk](/img/docs/onboarding/ubuntu-vm-setup/virtualbox-hard-disk.png)
+
+6. Click **Finish** on the Summary page. Your VM should now be powering up and it may take a while for Ubuntu to install.
+
+### 🏁 Final Steps
+
+1. On your Ubuntu VM, login to your account with the username and password you set earlier.
+
+![Ubuntu Login](/img/docs/onboarding/ubuntu-vm-setup/ubuntu-login.png)
+
+2. Click **Skip** or **Next** on the top right for the welcome screen that appears (adjust any settings based on your preferences).
+
+3. Click **Done** to finish the welcome screen.
+
+You have now successfully installed Ubuntu.
+
+![Ubuntu Desktop](/img/docs/onboarding/ubuntu-vm-setup/ubuntu-desktop.png)
+
+## ✨ Bonus Tips
+
+- Take a [snapshot](https://docs.oracle.com/en/virtualization/virtualbox/7.0/user/Introduction.html#snapshots) of your virtual machine now!
+- Learn more about the terminal and things to do after installing Ubuntu [here](https://academy.zerotomastery.io/courses/devops-bootcamp/lectures/32682118).
