@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 🗺 Technical Writing Overview
 
-Though programming is a large part of software development, it's not the only part. In fact, it can become a small part. You may spend a lot more time on planning, organizing, and writing technical documentation. We'll cover some tips and tricks that may help you communicate your ideas clearly and effectively through **technical writing**.
+Though using a programming language may be important for your projects, communicating effectively is crucial for documenting your work. You may spend a lot more time on planning, organizing, and writing technical documentation. We'll cover some tips and tricks that may help you communicate your ideas clearly and effectively through **technical writing**.
 
 ## 💭 Why Learn About Technical Writing?
 
