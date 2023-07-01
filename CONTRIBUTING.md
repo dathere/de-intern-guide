@@ -4,6 +4,8 @@
 
 The site is generated based on the content in the `docs` folder. Each folder in `docs` represents a section of the site. Each `.md` and `.mdx` file in a folder represents a page in that section. You can learn more by reading more about [Docusaurus](https://github.com/facebook/docusaurus), the static site generator used to build this site.
 
+You can also learn about Markdown [here](https://www.markdownguide.org/).
+
 I recommend keeping a consistent format throughout the guide. For example, preceding each section title is a relevant emoji.
 
 ## Installation
