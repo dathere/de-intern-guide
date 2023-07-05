@@ -4,7 +4,7 @@ slug: about
 
 # 🍃 About the Guide
 
-This guide serves as a reference guide for new data engineering interns at [datHere](https://dathere.com).
+This guide serves as a reference for new data engineering interns at [datHere](https://dathere.com).
 
 ## ⚡ Quick links!
 
