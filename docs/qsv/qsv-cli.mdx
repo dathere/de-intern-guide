@@ -1,0 +1,48 @@
+# ⚡ qsv
+
+Meet **qsv**, your new command line tool for data wrangling!
+
+## 💭 What's qsv?
+
+qsv is a command line tool with 50+ commands that can perform data wrangling tasks in a relatively efficient manner.
+
+For example, if I had a csv file that looked like this:
+
+```csv title=prices.csv
+id,fruit,cost
+1,apple,5.00
+2,banana,10.00
+3,celery,2.00
+```
+
+Then I can use qsv to perform all sorts of commands based on the data. Maybe I want to simply count how many rows there are (not including the header row). I can run:
+
+```bash
+qsv count prices.csv
+```
+
+And the output would be `3`. But I can add flags for even more options like additionally getting the number of characters in the longest row by adding `--width` (e.g., `qsv count prices.csv --width`), and other commands also have subcommands!
+
+## ✨ Cool Features
+
+-   **50+ commands:** There's plenty of options for users for all sorts of backgrounds to use qsv in their workflow
+-   **Blazingly fast:** qsv is built primarily with the Rust programming language, offering fast speeds even for very large datasets
+-   **Mix and match:** Combine different qsv commands and integrate qsv with other tools to enhance data wrangling
+
+## 🛠 Install qsv
+
+1. [Install qsv](/onboarding/qsv-setup).
+2. Once installed, run `qsv --list` to list the commands available to you, and you can further learn about them by running `qsv <command> --help` where `<command>` is the command you want to learn about (e.g., `qsv count --help`).
+3. Try running qsv commands on your files!
+
+## 📊 Your first command: `qsv count`
+
+Navigate to your desired `.csv` file on the terminal and try typing `qsv count <filename>` (where `<filename>` is the name of your file) and see what happens!
+
+See if you can try following along in [the intro-to-count.ipynb notebook](https://nbviewer.org/github/jqnatividad/qsv/blob/master/contrib/notebooks/intro-to-count.ipynb).
+
+## 🚀 Ready for some data wrangling?
+
+That's just the beginning! Explore more commands, use qsv to perform various transformations, and have fun wrangling data with qsv!
+
+Remember, qsv can help make data exciting and easy, even if you're just starting on your data journey!
