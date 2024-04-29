@@ -67,4 +67,4 @@ Here's a Markdown template you can use daily to keep track of your standup notes
 - [ ]
 ```
 
-Personally I like to use [Obsidian](https://obsidian.md/) to keep track of my daily standup notes (especially with its [Daily Notes plugin](https://help.obsidian.md/Plugins/Daily+notes)), but you can use any note-taking app you like.
+Personally I like to use [Obsidian](https://obsidian.md/) to keep track of my daily standup notes (especially with its [Daily Notes plugin](https://help.obsidian.md/Plugins/Daily+notes)), but you can use any note-taking app you like. Note that with Obsidian you may need to purchase a commercial use license in order to use Obsidian as your program. Another option is to use Visual Studio Code.

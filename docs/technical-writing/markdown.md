@@ -19,7 +19,7 @@ In fact, the page you're reading right now is built based on Markdown!
 
 Here are some Markdown editors you can use for taking notes:
 
-- [Obsidian](https://obsidian.md/)
+- [Obsidian](https://obsidian.md/) (you may need to purchase a commercial license)
 - [Notion](https://www.notion.so/)
 
 :::note
