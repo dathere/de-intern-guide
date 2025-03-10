@@ -4,12 +4,162 @@ sidebar_position: 4
 
 # 📊 CKAN Setup
 
-In this section we'll go over how to install [CKAN](https://ckan.org) and get it running on your Ubuntu VM.
-
-:::caution 🚧 Work in Progress
-
-This section is not complete yet. Please refer to the [CKAN 2.9.9 documentation on "Installing CKAN from source"](https://docs.ckan.org/en/2.9/maintaining/installing/install-from-source.html) for now.
-
-:::
+In this section we'll go over how to install [CKAN](https://ckan.org) v2.10.6 and get it running on your Ubuntu VM.
 
 ## 📝 Written Tutorial
+
+Prerequisites:
+
+- New installation of Ubuntu 22.04 (virtual machine, VPS, local device, etc.) connected to the Internet.
+
+For these installation notes we'll assume the username in Ubuntu is `rzmk`, so change it to yours when applicable.
+
+## Upgrade packages
+
+```bash
+sudo apt update -y && sudo apt upgrade -y
+```
+
+## Set up SSH (optional)
+
+If you're using a VM then it may be easier when developing to SSH into the VM from a code editor such as VSCode, VSCodium, or Zed.
+
+To enable SSH on the VM install `openssh-server`, and to identify the VM IP address to use when using SSH install `net-tools`:
+
+```bash
+sudo apt install openssh-server net-tools -y
+```
+
+Run the `ifconfig` command to identify your IP address, then use SSH on your local device and code editor to access the environment:
+
+```bash
+ssh rzmk@IPADDRESSHERE
+```
+
+
+## Install Docker
+
+> Notes for this section based on https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04.
+
+```bash
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce -y
+```
+
+Also add your user to the sudo group to run Docker without `sudo`:
+
+```bash
+sudo usermod -aG docker ${USER}
+su - ${USER}
+```
+
+## Install `docker-compose`
+
+We use `docker-compose` to set up and run `ckan-compose`.
+
+```bash
+sudo apt install docker-compose -y
+```
+
+<!--
+## Install Docker Compose
+
+> Notes for this section based on https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04.
+
+```bash
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+docker compose version
+```
+-->
+
+## Download Ahoy and add to $PATH
+
+We'll be using [ckan-compose](https://github.com/tino097/ckan-compose) to handle the PostgreSQL, Redis, and SOLR setup. One of the prerequisites for using ckan-compose is installing [Ahoy](https://github.com/ahoy-cli/ahoy).
+
+Go to https://github.com/ahoy-cli/ahoy/releases/latest and download the `ahoy-bin-linux-amd64` file and move it to your `$PATH` named as `ahoy`.
+
+```bash
+sudo mv ~/Downloads/ahoy-bin-linux-amd64 /usr/local/bin/ahoy
+sudo chmod +x /usr/local/bin/ahoy
+```
+
+<!--
+## Setup Git and Git Credential Manager
+
+[Login to GitHub](https://github.com/login) on the VM and download the latest [Git Credential Manager `.deb` file from here](https://github.com/git-ecosystem/git-credential-manager/releases/latest) then in same folder as `.deb` file run:
+
+```bash
+# cd ~/Downloads
+sudo dpkg -i <path-to-package>
+git-credential-manager configure
+git config --global credential.credentialStore "cache"
+```
+-->
+
+## Set up ckan-compose
+
+```bash
+cd ~/
+sudo apt install docker-compose -y
+git clone https://github.com/tino097/ckan-compose.git
+cd ckan-compose
+ahoy generate-env
+ahoy up
+```
+
+You may get asked after `ahoy generate-env` to provide a `PROJECT_NAME`, this can be anything so we'll put `myproject`. You may also use the defaults for `DATASTORE_READONLY_PASSWORD` and `POSTGRES_PASSWORD` for development.
+
+## CKAN steps 1-4 with caveats
+
+```bash
+sudo apt-get install python3-dev libpq-dev python3-pip python3-venv git-core redis-server -y
+sudo mkdir -p /usr/lib/ckan/default
+sudo chown `whoami` /usr/lib/ckan/default
+python3 -m venv /usr/lib/ckan/default
+. /usr/lib/ckan/default/bin/activate
+pip install --upgrade pip
+pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.10.6#egg=ckan[requirements]'
+deactivate
+. /usr/lib/ckan/default/bin/activate
+sudo mkdir -p /etc/ckan/default
+sudo chown -R `whoami` /etc/ckan/
+ckan generate config /etc/ckan/default/ckan.ini
+ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
+```
+
+Next you must modify the CKAN config at `/etc/ckan/default/ckan.ini`:
+
+```ini
+debug = true
+ckan.debug_supress_header = False
+```
+
+Also replace the following values to this:
+
+```bash
+ckan.devserver.threaded = true
+ckan.max_resource_size = 10000
+ckan.max_image_size = 5
+```
+
+Continue to step 7 while in the virtual environment (replace `rzmk` with your group then username for the `chown` command and your CKAN details for the CKAN sysadmin account generation command). You may be prompted to add a sysadmin username and password (the password may need to be at least 8 characters).
+
+```bash
+cd /usr/lib/ckan/default/src/ckan
+pip install flask-debugtoolbar==0.14.1
+cd /var/lib
+sudo mkdir -p ckan/default
+sudo chown rzmk.rzmk ckan/default
+ckan -c /etc/ckan/default/ckan.ini db init
+ckan -c /etc/ckan/default/ckan.ini sysadmin add rzmk email=rzmk@localhost name=rzmk
+ckan -c /etc/ckan/default/ckan.ini run
+```
+
+Now you should be able to view your locally running CKAN instance at [http://localhost:5000](http://localhost:5000).
