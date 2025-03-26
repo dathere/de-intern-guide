@@ -163,3 +163,22 @@ ckan -c /etc/ckan/default/ckan.ini run
 ```
 
 Now you should be able to view your locally running CKAN instance at [http://localhost:5000](http://localhost:5000).
+
+## When restarting your server
+
+If you shut down your Ubuntu instance and then start it again, you may want to run the following commands to get the CKAN instance running again:
+
+```bash
+/etc/init.d/redis-server stop
+cd ckan-compose
+ahoy up
+```
+
+Then run the following (e.g., after you SSH from your preferred terminal):
+
+```bash
+cd /usr/lib/ckan/default/
+. ./bin/activate
+cd src/ckan
+ckan -c /etc/ckan/default/ckan.ini run
+```
