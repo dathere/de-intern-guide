@@ -112,16 +112,29 @@ git config --global credential.credentialStore "cache"
 ```
 -->
 
-## Set up ckan-compose
+## Set up ckan-compose (provides you with PostgreSQL, Redis, and SOLR 9)
 
 ```bash
 cd ~/
 sudo apt install docker-compose -y
 git clone https://github.com/tino097/ckan-compose.git
 cd ckan-compose
+git switch solr-9-impl
 ahoy generate-env
 ahoy up
 ```
+
+:::info Apple Silicon?
+
+If you're using macOS, you may need to change the postgis image used in `ckan-compose/postgres/Dockerfile`. Change `FROM postgis/postgis:16-3.4-alpine` to FROM `imresamu/postgis:16-3.4-bundle0-bookworm` (based on [this issue](https://github.com/dathere/de-intern-guide/issues/29)).
+
+:::
+
+:::info Permission denied?
+
+If you get a "Permission denied" error, you may need to run `sudo ahoy up` instead of `ahoy up`.
+
+:::
 
 You may get asked after `ahoy generate-env` to provide a `PROJECT_NAME`, this can be anything so we'll put `myproject`. You may also use the defaults for `DATASTORE_READONLY_PASSWORD` and `POSTGRES_PASSWORD` for development.
 
