@@ -117,6 +117,17 @@ const config = {
                 darkTheme: darkCodeTheme,
             },
         }),
+        scripts: [
+            {
+                src: "https://mk-analytics.dathere.com/api/script.js",
+                async: true,
+                defer: true,
+                "data-site-id": "6",
+                "data-session-replay": true,
+                "data-track-errors": true,
+                "data-web-vitals": true,
+            }
+        ],
 };
 
 module.exports = config;
